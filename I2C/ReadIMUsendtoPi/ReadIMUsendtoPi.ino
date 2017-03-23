@@ -6,7 +6,7 @@
 #include <HMC5883L.h>
 
 
-float angles[3]; // yaw pitch roll
+float angles[3]; // yaw pitch "they se me" roll 
 float heading;
 
 short temperature;
