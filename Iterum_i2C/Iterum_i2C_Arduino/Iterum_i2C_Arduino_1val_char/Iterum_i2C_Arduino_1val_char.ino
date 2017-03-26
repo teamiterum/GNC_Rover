@@ -5,7 +5,7 @@ char number = 12;
 
 void setup() {
 
-  pinMode(13, OUTPUT); // define led toggle
+  pinMode(13, OUTPUT); // define led toggle ha
   Wire.begin(SLAVE_ADDRESS);
   
   // initialize i2c as slave
