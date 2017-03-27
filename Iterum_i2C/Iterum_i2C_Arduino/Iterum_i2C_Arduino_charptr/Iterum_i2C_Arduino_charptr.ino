@@ -1,12 +1,14 @@
 #include <Wire.h>
  
 #define SLAVE_ADDRESS 0x04
-char number[6] = {13,26,11,10,9,8};
+#define uintSize sizeof(unsigned int)
+
+
+char* abp;
 
 void setup() {
 
   pinMode(13, OUTPUT); // define led toggle
-  Wire.begin(SLAVE_ADDRESS);
   
   // initialize i2c as slave
   Wire.begin(SLAVE_ADDRESS);
@@ -14,6 +16,10 @@ void setup() {
   // define callbacks for i2c communication
   //Wire.onReceive(receiveData);   //These cmds act as interrupts?? 
   Wire.onRequest(sendData);
+
+  unsigned int number[2] = {61615 , 3855};
+  abp = (char*)&number;
+  
 }
 
 void loop() {
@@ -23,6 +29,8 @@ void loop() {
 }
 
 void sendData(){
- 
-  Wire.write(number,2);
+  int j;
+  for (j = 0; j < X; j++) {
+  Wire.write(abp[j]);    
+  }    
 }
