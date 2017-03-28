@@ -1,12 +1,13 @@
 #include <Wire.h>
  
 #define SLAVE_ADDRESS 0x04
-#define uintSize sizeof(unsigned int)
+#define valueSize sizeof(long unsigned int)
+#define noOfValues 2
 
-
-char* abp;
+byte* abp;
 
 void setup() {
+  Serial.begin(9600);
 
   pinMode(13, OUTPUT); // define led toggle
   
@@ -17,8 +18,15 @@ void setup() {
   //Wire.onReceive(receiveData);   //These cmds act as interrupts?? 
   Wire.onRequest(sendData);
 
-  unsigned int number[2] = {61615 , 3855};
-  abp = (char*)&number;
+  long unsigned int number[noOfValues] = {61614 , 3855};
+  //Serial.println(sizeof(number[1]));
+  
+  abp = (byte*)&number;
+  
+  int j;
+  for (j = 0; j < valueSize*noOfValues ; j++) {
+    Serial.println(abp[j]); 
+  }
   
 }
 
@@ -29,8 +37,5 @@ void loop() {
 }
 
 void sendData(){
-  int j;
-  for (j = 0; j < X; j++) {
-  Wire.write(abp[j]);    
-  }    
+  Wire.write(abp,valueSize*noOfValues); 
 }

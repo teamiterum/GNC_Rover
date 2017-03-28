@@ -19,12 +19,16 @@ int main() {
 		printf("%i\n", myByteArray[i]);
 	}
 
-	unsigned int myIntArray2[2] = { 0,0 };
 
+
+	unsigned int myIntArray2[2 * uintSize];
+	
+	int* aip;
+	aip = (int*)&myByteArray;
 
 	for (i = 0; i < 2; i++) {
-		myIntArray2[i] = abp[i];
-		printf("%i\n", myIntArray[i]);
+		myIntArray2[i] = aip[i];
+		printf("%i\n", myIntArray2[i]);
 	}
 
 
