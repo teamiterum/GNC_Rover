@@ -1,7 +1,7 @@
 #include <Wire.h>
  
 #define SLAVE_ADDRESS 0x04
-char number = 12;
+int number = 12;
 
 void setup() {
 

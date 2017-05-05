@@ -5,9 +5,11 @@
 #define noOfValues 2
 
 byte* abp;
+long unsigned int number[noOfValues] = {61614 , 3855};
 
 void setup() {
   Serial.begin(9600);
+  pinMode(LED_BUILTIN, OUTPUT);
 
   pinMode(13, OUTPUT); // define led toggle
   
@@ -18,7 +20,7 @@ void setup() {
   //Wire.onReceive(receiveData);   //These cmds act as interrupts?? 
   Wire.onRequest(sendData);
 
-  long unsigned int number[noOfValues] = {61614 , 3855};
+  
   //Serial.println(sizeof(number[1]));
   
   abp = (byte*)&number;
@@ -32,10 +34,12 @@ void setup() {
 
 void loop() {
   delay(1000);
+  digitalWrite(LED_BUILTIN, HIGH);
   delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
   
 }
 
 void sendData(){
-  Wire.write(abp,valueSize*noOfValues); 
+  Wire.write(abp,valueSize*noOfValues);
 }

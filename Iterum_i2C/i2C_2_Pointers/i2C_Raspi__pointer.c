@@ -19,8 +19,7 @@
 static const char *devName = "/dev/i2c-1";
 
 int main(int argc, char** argv) {
-
-	int arg; //Store second argument
+	int noOfInts; //Store second argument
 
 //*** Performing Checks and starting communication ***\\
 
@@ -33,8 +32,8 @@ int main(int argc, char** argv) {
 	// Check if the second argument is a decimal
 
 
-	if (0 == sscanf(argv[1], "%d", &arg)) {
-		fprintf(stderr, "Invalid parameter %d \"%s\"\n", arg, argv[1]);
+	if (0 == sscanf(argv[1], "%d", &noOfInts)) {
+		fprintf(stderr, "Invalid parameter %d \"%s\"\n", noOfInts, argv[1]);
         exit(1);
 	}
 
@@ -57,25 +56,36 @@ int main(int argc, char** argv) {
 
 //***Performing Checks and starting communication***\\
 	
-	unsigned int numbers[arg * uintSize];
-	// if the argument was one, read data
-	if (arg != 0) {
+	unsigned int numbers[noOfInts]; //ints to receive, set on argc
+	int noOfBytes = noOfInts * uintSize;
+	
+	// if the argument is not zero, read data
+	if (noOfInts != 0) {
 
-        unsigned char buf[arg * uintSize];
+        unsigned char buf[noOfBytes];
 		
-        read(file, buf, arg*uintSize);
-
-        int* aip;
-		aip = (int*)&buf;
+        read(file, buf, noOfBytes);
 		
+		// Checking what was received
+		printf("buffer bytes:\n");
 		int i;
-		for (i = 0; i < 2; i++) {
-		  numbers[i] = aip[i];
-		  printf("%i\n", numbers[i]);
+		for (i = 0; i < noOfBytes; i++) {
+			printf("%i\n", buf[i]);
 		}
+		
+		// Transfering data to integers
+        int* aip;
+	aip = (int*)&buf;
+	int j;
+	for (j = 0; j < noOfInts; j++) {
+		numbers[j] = aip[j];
+		printf("%i\n", numbers[j]);
+	}		
+		
+
 	}
 	else {
-          printf("Invalid number, %d \n",arg);
+          printf("Invalid number, %d \n",noOfInts);
 	}
     // Now wait else you could crash the arduino by sending requests too fast
     //usleep(10000);
