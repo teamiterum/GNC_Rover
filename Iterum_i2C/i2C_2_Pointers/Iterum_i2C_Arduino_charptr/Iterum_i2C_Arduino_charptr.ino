@@ -2,10 +2,10 @@
  
 #define SLAVE_ADDRESS 0x04
 #define valueSize sizeof(long unsigned int)
-#define noOfValues 2
+#define noOfValues 1
 
 byte* abp;
-long unsigned int number[noOfValues] = {61614 , 3855};
+long unsigned int number[noOfValues] = {61614};
 
 void setup() {
   Serial.begin(9600);
