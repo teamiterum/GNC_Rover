@@ -1,22 +1,21 @@
 #include <Wire.h>
-#include <TimerOne.h>
  
 #define SLAVE_ADDRESS 0x04
-#define valueSizeTx sizeof(long unsigned int)
+#define X long unsigned int
+
+#define valueSizeTx sizeof(X)
 #define noOfValuesTx 1
-#define valueSizeRx sizeof(long unsigned int)
+#define valueSizeRx sizeof(X)
 #define noOfValuesRx 3
+
 
 //Create pointers to pass to the i2C request functions
 byte* abpTx;
 byte* abpRx;
 
 // Create an array where to transfer data to send
-long unsigned int storeTx[noOfValuesTx];
-long unsigned int storeRx[noOfValuesRx];
-
-int k = 0;
-int j = 0;
+X storeTx[noOfValuesTx];
+X storeRx[noOfValuesRx];
 
 void setup() {
   Serial.begin(9600);
@@ -49,7 +48,7 @@ void loop() {
     Serial.println(abpRx[i]);
   }*/
   
-  //Change/use the values in data arrays here!
+  // Change/use the values in data arrays here!
   
 }
 
@@ -64,6 +63,5 @@ void receiveData(){
     for(i=0;i<noOfValuesRx*valueSizeRx;i++){
       abpRx[i] = Wire.read();  
     }
-  j++;
   }
 }
