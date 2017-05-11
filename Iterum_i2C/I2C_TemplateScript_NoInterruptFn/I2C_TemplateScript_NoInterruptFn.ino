@@ -1,5 +1,4 @@
 #include <Wire.h>
-#include <TimerOne.h>
  
 #define SLAVE_ADDRESS 0x04
 #define valueSizeTx sizeof(long unsigned int)
