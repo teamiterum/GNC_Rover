@@ -22,7 +22,7 @@ class Module
 	byte* ptrRx;
     
 	
-	void send();
+	void sending();
     void receive();
 	
   private:

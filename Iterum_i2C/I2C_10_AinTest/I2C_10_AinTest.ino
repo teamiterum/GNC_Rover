@@ -11,13 +11,13 @@ byte* abpTx;
 
 // Create an array for the data
 int res = 0;
-int res2 = 0;
+unsigned int res2 = 666;
 
 void setup() {
   Serial.begin(9600);
 
-  Timer1.initialize(5000); 
-  Timer1.attachInterrupt(takeReading);
+  //Timer1.initialize(5000); 
+  //Timer1.attachInterrupt(takeReading);
 
   abpTx = (byte*)&res2;
   Wire.begin(SLAVE_ADDRESS);
@@ -30,7 +30,7 @@ void loop() {
   /*digitalWrite(LED_BUILTIN, HIGH);
   delay(500);
   digitalWrite(LED_BUILTIN, LOW);*/
-  Serial.println(res);
+  //Serial.println(res);
   
     
 }
@@ -44,7 +44,7 @@ void takeReading()
 {
   
   res = analogRead(analogPin);
-  res2++;
+  //res2++;
   //Serial.println(abpTx[0]);  
 }
 
